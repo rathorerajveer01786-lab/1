@@ -45,11 +45,8 @@ body{
   margin-bottom:20px;
   text-shadow:0 0 20px #fff;
   animation:fadeInText 2s ease-in-out forwards;
-}
-
-@keyframes fadeInText{
-  0%{opacity:0; transform:translateY(-10px);}
-  100%{opacity:1; transform:translateY(0);}
+  position:relative;
+  z-index:4;
 }
 
 button{
@@ -63,6 +60,8 @@ button{
   font-size:clamp(14px,4vw,18px);
   box-shadow:0 0 20px white;
   transition:0.3s;
+  position:relative;
+  z-index:4; /* ensure button is above heart */
 }
 button:hover{
   transform:scale(1.1);
@@ -82,6 +81,7 @@ button:hover{
   filter:url(#glow);
   animation:pulseGlow 2s ease-in-out infinite alternate;
   z-index:1;
+  pointer-events: none; /* prevent blocking button clicks */
 }
 
 .heart-bg path{
@@ -349,7 +349,7 @@ function typeWriter(){
     typeText.innerHTML+=msg.charAt(i);
     i++;
     typeText.scrollTop = typeText.scrollHeight; // auto scroll
-    setTimeout(typeWriter,50); // faster typing for smoother experience
+    setTimeout(typeWriter,50);
   } else {
     launchFireworks();
     document.getElementById("proposeBtn").style.display="inline-block";
